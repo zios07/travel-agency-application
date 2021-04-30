@@ -1,0 +1,62 @@
+<div class="row">
+  <div class="col text-center">
+    <div class="content" fxLayout="row" fxLayoutAlign="center">
+
+      <mat-card elevation="5" fxFlex>
+
+        <mat-card-title>
+          <h2>{{ title }}</h2>
+        </mat-card-title>
+
+        <mat-card-content>
+          <form *ngIf="!submitted" [formGroup]="form" (ngSubmit)="onSubmit()" #signupForm="ngForm">
+            <mat-grid-list cols="3" rowHeight="100px">
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput formControlName="email" type="email" required placeholder="email@demo.com">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput placeholder="Password" formControlName="password" required
+                         type="password">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput placeholder="Confirmation" formControlName="password" required
+                         type="password">
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput placeholder="First Name" formControlName="firstName" required>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput placeholder="Last Name" formControlName="lastName" required>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field class="date-form-field">
+                  <input [matDatepicker]="picker" matInput placeholder="birthday"
+                         formControlName="bDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                </mat-form-field>
+              </mat-grid-tile>
+            </mat-grid-list>
+            <button type="submit" [disabled]="!signupForm.form.valid" mat-raised-button color="primary">Sign
+              up
+            </button>
+          </form>
+          <br>
+
+          <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+          <br>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
