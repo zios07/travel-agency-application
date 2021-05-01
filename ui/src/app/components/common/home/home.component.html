@@ -4,21 +4,21 @@
 
     <mat-form-field appearance="outline">
       <mat-label>City</mat-label>
-      <input formArrayName="city" matInput placeholder="City...">
+      <input formControlName="city" matInput placeholder="City...">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>Start date</mat-label>
-      <input matInput [matDatepicker]="picker1">
-      <mat-datepicker-toggle formArrayName="startDate" placeholder="dd/MM/yyyy" matSuffix
+      <input matInput [matDatepicker]="picker1" formControlName="startDate">
+      <mat-datepicker-toggle placeholder="dd/MM/yyyy" matSuffix
                              [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
       <mat-label>End date</mat-label>
-      <input matInput [matDatepicker]="picker2">
-      <mat-datepicker-toggle formArrayName="endDate" placeholder="dd/MM/yyyy" matSuffix
+      <input matInput [matDatepicker]="picker2" formControlName="endDate">
+      <mat-datepicker-toggle placeholder="dd/MM/yyyy" matSuffix
                              [for]="picker2"></mat-datepicker-toggle>
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>

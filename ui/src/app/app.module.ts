@@ -38,6 +38,9 @@ import { OrderHistoryComponent } from './components/order-history/order-history.
 import { CartComponent } from './components/cart/cart.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DashboardComponent } from './components/admin/dashboard/dashboard.component';
+import { HotelEditorComponent } from './components/admin/hotel-editor/hotel-editor.component';
+import { TicketEditorComponent } from './components/admin/ticket-editor/ticket-editor.component';
+import { CityBreakEditorComponent } from './components/admin/city-break-editor/city-break-editor.component';
 
 
 @NgModule({
@@ -51,7 +54,10 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
     OrderHistoryComponent,
     CartComponent,
     ProfileComponent,
-    DashboardComponent
+    DashboardComponent,
+    HotelEditorComponent,
+    TicketEditorComponent,
+    CityBreakEditorComponent
   ],
   imports: [
     BrowserModule,

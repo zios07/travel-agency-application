@@ -1,0 +1,43 @@
+<div class="content" fxLayout="row" fxLayoutAlign="center">
+
+  <mat-card elevation="5" fxFlex>
+
+    <mat-card-title>
+      <h2 align="center">{{ title }}</h2>
+    </mat-card-title>
+
+    <mat-card-content>
+      <form *ngIf="!submitted" [formGroup]="hotelForm" (ngSubmit)="onSubmit()" #form="ngForm">
+        <mat-grid-list cols="3" rowHeight="100px">
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="City" formControlName="city">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput placeholder="Name" formControlName="name">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Total rooms" formControlName="totalRooms">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field>
+              <input matInput type="number" placeholder="Room price" formControlName="roomPrice">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <button type="submit" [disabled]="!form.form.valid" mat-raised-button color="primary">Save</button>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </form>
+      <br>
+
+      <mat-spinner *ngIf="submitted" mode="indeterminate"></mat-spinner>
+      <br>
+    </mat-card-content>
+  </mat-card>
+</div>

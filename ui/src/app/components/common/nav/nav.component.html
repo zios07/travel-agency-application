@@ -10,6 +10,30 @@
       <span>Dashboard</span>
     </a>
 
+    <button class="mat-button-menu" mat-button [matMenuTriggerFor]="adminMenuList" *ngIf="connectedRole === 'ADMIN'">
+      <mat-icon>menu</mat-icon>
+      <span>Agency services</span>
+    </button>
+
+    <mat-menu #adminMenuList="matMenu">
+      <a mat-menu-item routerLink="admin/city-break-editor">
+        <mat-icon>city</mat-icon>
+        <span>City break editor</span>
+      </a>
+      <a mat-menu-item routerLink="admin/hotel-editor">
+        <mat-icon>home</mat-icon>
+        <span>Hotel editor</span>
+      </a>
+      <a mat-menu-item routerLink="admin/ticket-editor">
+        <mat-icon>badge</mat-icon>
+        <span>Ticket editor</span>
+      </a>
+      <a mat-menu-item (click)="logout()">
+        <mat-icon>clear</mat-icon>
+        <span>Logout</span>
+      </a>
+    </mat-menu>
+
     <span class="fill-remaining-space"></span>
     <span class="welcome-span" *ngIf="authenticated">Signed in as <b>{{connectedUser?.email}}</b></span>
     <button class="mat-button-menu" mat-button [matMenuTriggerFor]="menuList">
