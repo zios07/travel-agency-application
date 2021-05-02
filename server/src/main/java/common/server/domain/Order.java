@@ -20,10 +20,13 @@ public class Order {
     private long id;
 
     @OneToMany
-    private List<HotelBooking> hotelBookings;
+    private List<Booking> bookings;
 
     private double price;
 
     private LocalDateTime dateTime;
+
+    @ManyToOne
+    private User user;
 
 }

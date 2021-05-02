@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {ToastrService} from 'ngx-toastr';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-order-history',
@@ -7,9 +10,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderHistoryComponent implements OnInit {
 
-  constructor() { }
+  orders = [];
+
+  constructor(private http: HttpClient, private toastr: ToastrService) {
+  }
 
   ngOnInit() {
+    this.loadOrders();
+  }
+
+  loadOrders() {
+    this.http.get(environment.API_URL + '/orders').subscribe((orders: any) => {
+      this.orders = orders;
+    }, error => {
+      this.toastr.error('Could not load orders');
+    });
   }
 
 }

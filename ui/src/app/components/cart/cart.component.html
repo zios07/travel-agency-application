@@ -1,3 +1,21 @@
-<p>
-  cart works!
-</p>
+<br>
+<h2 align="center">Cart</h2>
+<br>
+<h4 *ngIf="!bookings || bookings.length === 0">No bookings yet</h4>
+<div class="bookings-container" *ngIf=" bookings.length > 0">
+  <mat-card class="example-card" *ngFor="let booking of bookings">
+    <mat-card-header>
+      <mat-card-title>{{booking.product.name}}</mat-card-title>
+      <mat-card-subtitle>{{booking.product.type}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <p>
+        {{booking.product.description}}<br>
+        {{booking.product.price | currency}}
+      </p>
+    </mat-card-content>
+  </mat-card>
+  <br>
+  <button mat-raised-button color="primary" (click)="confirmOrder()">Confirm order</button>
+</div>
+<br>

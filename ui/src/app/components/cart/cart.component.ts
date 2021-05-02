@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../environments/environment';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-cart',
@@ -7,9 +10,30 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  bookings = [];
+
+  constructor(private http: HttpClient, private toastr: ToastrService) {
+  }
 
   ngOnInit() {
+    this.loadBookings();
+  }
+
+  loadBookings() {
+    this.http.get(environment.API_URL + '/bookings').subscribe((bookings: any) => {
+      this.bookings = bookings;
+    }, error => {
+      this.toastr.error('Could not load bookings');
+    });
+  }
+
+  confirmOrder() {
+    this.http.post(environment.API_URL + '/orders', null).subscribe((order: any) => {
+      this.toastr.info('Order was confirmed successfully!');
+      this.loadBookings();
+    }, error => {
+      this.toastr.error('Could confirm order');
+    });
   }
 
 }

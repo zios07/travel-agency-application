@@ -3,8 +3,9 @@ package common.server.rest;
 import common.server.domain.CityBreak;
 import common.server.domain.Hotel;
 import common.server.domain.Ticket;
+import common.server.enums.ProductType;
+import common.server.repository.BookingRepository;
 import common.server.repository.CityBreakRepository;
-import common.server.repository.HotelBookingRepository;
 import common.server.repository.HotelRepository;
 import common.server.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AgencyServiceController {
 
-    private final HotelBookingRepository hotelBookingRepository;
+    private final BookingRepository bookingRepository;
     private final HotelRepository hotelRepository;
     private final TicketRepository ticketRepository;
     private final CityBreakRepository cityBreakRepository;
@@ -33,7 +34,7 @@ public class AgencyServiceController {
         // Only return the hotels that have available rooms for the given date range
         return hotels.stream().filter(
                 hotel ->
-                        hotelBookingRepository.findByHotelIdAndStartDateGreaterThanAndEndDateLessThan(hotel.getId(), startDate, endDate).size() < hotel.getAvailableRooms())
+                        bookingRepository.findByProductIdAndStartDateGreaterThanAndEndDateLessThan(hotel.getId(), startDate, endDate).size() < hotel.getAvailableRooms())
                 .collect(Collectors.toList());
     }
 
@@ -50,16 +51,19 @@ public class AgencyServiceController {
     @PostMapping("hotels")
     public Hotel createHotel(@RequestBody Hotel hotel) {
         hotel.setAvailableRooms(hotel.getTotalRooms());
+        hotel.setType(ProductType.HOTEL);
         return hotelRepository.save(hotel);
     }
 
     @PostMapping("tickets")
     public Ticket createTicket(@RequestBody Ticket ticket) {
+        ticket.setType(ProductType.TICKET);
         return ticketRepository.save(ticket);
     }
 
     @PostMapping("city-breaks")
     public CityBreak createCityBreak(@RequestBody CityBreak cityBreak) {
+        cityBreak.setType(ProductType.CITY_BREAK);
         return cityBreakRepository.save(cityBreak);
     }
 

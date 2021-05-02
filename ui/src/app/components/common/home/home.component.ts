@@ -56,4 +56,17 @@ export class HomeComponent implements OnInit {
   }
 
 
+  addBooking(hotel) {
+    const booking = {
+      product: hotel,
+      startDate: this.searchForm.value.startDate,
+      endDate: this.searchForm.value.endDate
+    };
+    this.http.post(environment.API_URL + '/bookings/hotel', booking).subscribe(booking => {
+      this.toastr.info('Booking added with success');
+      this.search();
+    }, error => {
+      this.toastr.error('Could not add the booking');
+    });
+  }
 }

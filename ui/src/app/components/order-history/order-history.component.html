@@ -1,3 +1,26 @@
-<p>
-  order-history works!
-</p>
+<br>
+<h2 align="center">Order history</h2>
+<br>
+<h4 *ngIf="!orders || orders.length === 0">No orders yet</h4>
+<div class="orders-container" *ngIf=" orders.length > 0">
+  <mat-card class="example-card" *ngFor="let order of orders; let i = index">
+    <mat-card-header>
+      <mat-card-title>Order {{i + 1}}</mat-card-title>
+      <mat-card-subtitle>Total order price: {{order.price | currency}}</mat-card-subtitle>
+      <mat-card-subtitle>Order date: {{order.dateTime | date}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <hr>
+      <div *ngFor="let booking of order.bookings">
+        <h5>{{booking.product.name}} - {{booking.product.type}}</h5>
+        {{booking.product.description}} <br>
+        Price: <b>{{booking.product.price | currency}}</b> <br>
+        Start date: {{booking.startDate | date}} <br>
+        End date: {{booking.endDate | date}} <br>
+        <hr>
+      </div>
+    </mat-card-content>
+  </mat-card>
+  <br>
+</div>
+<br>

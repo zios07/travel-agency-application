@@ -8,29 +8,28 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
-@Table(name = "HOTEL_BOOKING_TABLE")
+@Table(name = "BOOKING_TABLE")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class HotelBooking {
+public class Booking {
 
     @Id
     @GeneratedValue
     private long id;
 
     @OneToOne
-    private Hotel hotel;
+    private Product product;
 
     private LocalDate startDate;
 
     private LocalDate endDate;
 
-    private int nbRooms;
-
-    private double totalPrice;
+    private boolean confirmed;
 
     @ManyToOne
     private User user;
+
 
 }
 
