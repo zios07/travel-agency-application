@@ -5,11 +5,6 @@
       <span>Travel Agency</span>
     </a>
 
-    <a mat-menu-item style="color: white" routerLink="admin/dashboard" *ngIf="connectedRole === 'ADMIN'">
-      <mat-icon>space_dashboard</mat-icon>
-      <span>Dashboard</span>
-    </a>
-
     <button class="mat-button-menu" mat-button [matMenuTriggerFor]="adminMenuList" *ngIf="connectedRole === 'ADMIN'">
       <mat-icon>menu</mat-icon>
       <span>Agency services</span>
