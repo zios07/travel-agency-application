@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from '../../services/user.service';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-profile',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  user;
+
+  constructor(private userService: UserService,
+              private toastr: ToastrService) {
+  }
 
   ngOnInit() {
+    this.userService.getAuthenticatedUser().subscribe(user => {
+      this.user = user;
+    }, error => {
+      this.toastr.error('Could not load user profile information');
+    });
   }
 
 }

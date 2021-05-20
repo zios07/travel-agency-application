@@ -1,3 +1,11 @@
-<p>
-  profile works!
-</p>
+<div class="container" *ngIf="user">
+  <h2>Profile information</h2><br>
+  <b>First name : </b> {{user.firstName}}<br><br>
+  <b>Last name : </b> {{user.lastName}}<br><br>
+  <b>Email : </b> {{user.email}}<br><br>
+  <b>Address : </b> {{user.address}}<br><br>
+  <b>Postal code : </b> {{user.postalCode}}<br><br>
+  <b>City : </b> {{user.city}}<br><br>
+  <b>Country : </b> {{user.country}}<br><br>
+  <b>Phone number : </b> {{user.phoneNumber}}<br>
+</div>

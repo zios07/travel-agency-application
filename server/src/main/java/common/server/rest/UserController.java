@@ -25,7 +25,7 @@ public class UserController {
 	}
 
 
-	@GetMapping(value = "/find/connected")
+	@GetMapping(value = "/authenticated")
 	public ResponseEntity<User> findUser() throws NotFoundException {
 		User user = service.getConnectedUser();
 		return new ResponseEntity<>(user, HttpStatus.OK);

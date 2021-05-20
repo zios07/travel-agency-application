@@ -18,8 +18,6 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   user: User = new User();
 
-  returnUrl: string;
-
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -33,7 +31,12 @@ export class RegisterComponent implements OnInit {
       email: ['', Validators.compose([Validators.email])],
       password: ['', Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(32)])],
       firstName: ['', Validators.compose([Validators.required])],
-      lastName: ['', Validators.compose([Validators.required])]
+      lastName: ['', Validators.compose([Validators.required])],
+      address: ['', Validators.compose([Validators.required])],
+      city: ['', Validators.compose([Validators.required])],
+      country: ['', Validators.compose([Validators.required])],
+      postalCode: ['', Validators.compose([Validators.required])],
+      phoneNumber: ['', Validators.compose([Validators.required, Validators.pattern(('[0-9]\\d{11}'))])]
     });
   }
 

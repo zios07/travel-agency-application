@@ -39,11 +39,28 @@
                 </mat-form-field>
               </mat-grid-tile>
               <mat-grid-tile>
-                <mat-form-field class="date-form-field">
-                  <input [matDatepicker]="picker" matInput placeholder="birthday"
-                         formControlName="bDate">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker touchUi="true" #picker></mat-datepicker>
+                <mat-form-field>
+                  <input matInput placeholder="Address" formControlName="address" required>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput placeholder="City" formControlName="city" required>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput placeholder="Country" formControlName="country" required>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput placeholder="Postal code" formControlName="postalCode" required>
+                </mat-form-field>
+              </mat-grid-tile>
+              <mat-grid-tile>
+                <mat-form-field>
+                  <input matInput placeholder="Phone number" formControlName="phoneNumber" required>
                 </mat-form-field>
               </mat-grid-tile>
             </mat-grid-list>
