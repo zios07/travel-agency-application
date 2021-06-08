@@ -18,10 +18,6 @@ public class Product {
     @GeneratedValue
     private long id;
 
-    private String name;
-
-    private String city;
-
     private String description;
 
     private double price;

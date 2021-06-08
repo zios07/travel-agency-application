@@ -15,6 +15,7 @@
         <h5>{{booking.product.name}} - {{booking.product.type}}</h5>
         {{booking.product.description}} <br>
         Price: <b>{{booking.product.price | currency}}</b> <br>
+        Total price: {{getDaysBetween(booking.startDate, booking.endDate) * booking.product.price | currency}}
         Start date: {{booking.startDate | date}} <br>
         End date: {{booking.endDate | date}} <br>
         <hr>

@@ -4,24 +4,26 @@
   <form class="search-form" [formGroup]="searchForm">
 
     <mat-form-field appearance="outline">
-      <mat-label>City</mat-label>
-      <input formControlName="city" matInput placeholder="City...">
+      <mat-label>Departure city</mat-label>
+      <input formControlName="departure" matInput placeholder="City...">
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Start date</mat-label>
-      <input matInput [matDatepicker]="picker1" formControlName="startDate">
+      <mat-label>Destination city</mat-label>
+      <input formControlName="destination" matInput placeholder="City...">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Flight date</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="date">
       <mat-datepicker-toggle placeholder="dd/MM/yyyy" matSuffix
                              [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>End date</mat-label>
-      <input matInput [matDatepicker]="picker2" formControlName="endDate">
-      <mat-datepicker-toggle placeholder="dd/MM/yyyy" matSuffix
-                             [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
+      <mat-label>Flight hour</mat-label>
+      <input formControlName="hour" type="number" min="0" max="23" matInput placeholder="City...">
     </mat-form-field>
 
     <button mat-raised-button [disabled]="searchForm.invalid" (click)="search()">Search</button>

@@ -13,6 +13,10 @@ import javax.persistence.Entity;
 @NoArgsConstructor
 public class Hotel extends Product {
 
+    private String name;
+
+    private String city;
+
     private int totalRooms;
 
     private int availableRooms;

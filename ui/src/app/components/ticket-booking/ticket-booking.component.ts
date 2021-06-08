@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ToastrService} from 'ngx-toastr';
@@ -17,9 +17,10 @@ export class TicketBookingComponent implements OnInit {
 
   constructor(private http: HttpClient, private toastr: ToastrService, private fb: FormBuilder) {
     this.searchForm = this.fb.group({
-      city: ['', Validators.required],
-      startDate: ['', Validators.required],
-      endDate: ['', Validators.required]
+      departure: ['', Validators.required],
+      destination: ['', Validators.required],
+      date: ['', Validators.required],
+      hour: ['', Validators.required]
     });
   }
 
@@ -30,9 +31,12 @@ export class TicketBookingComponent implements OnInit {
     if (this.searchForm.invalid) {
       return;
     }
-    const params = new HttpParams().set('startDate', this.formatDate(this.searchForm.value.startDate))
-      .set('endDate', this.formatDate(this.searchForm.value.endDate));
-    this.http.get(environment.API_URL + '/agency-services/tickets/' + this.searchForm.value.city, {params}).subscribe(resp => {
+    const params = new HttpParams()
+      .set('date', this.formatDate(this.searchForm.value.date))
+      .set('hour', this.searchForm.value.hour)
+      .set('departure', this.searchForm.value.departure)
+      .set('destination', this.searchForm.value.destination);
+    this.http.get(environment.API_URL + '/agency-services/tickets', {params}).subscribe(resp => {
       this.tickets = resp;
     }, error => {
       this.toastr.error('Could not load tickets for this city');
@@ -40,10 +44,10 @@ export class TicketBookingComponent implements OnInit {
   }
 
   private formatDate(date) {
-    let d = new Date(date),
-      month = '' + (d.getMonth() + 1),
-      day = '' + d.getDate(),
-      year = d.getFullYear();
+    const d = new Date(date);
+    let month = '' + (d.getMonth() + 1);
+    let day = '' + d.getDate();
+    const year = d.getFullYear();
 
     if (month.length < 2) {
       month = '0' + month;
@@ -62,7 +66,7 @@ export class TicketBookingComponent implements OnInit {
       startDate: this.searchForm.value.startDate,
       endDate: this.searchForm.value.endDate
     };
-    this.http.post(environment.API_URL + '/bookings/ticket', booking).subscribe(booking => {
+    this.http.post(environment.API_URL + '/bookings/ticket', booking).subscribe(() => {
       this.toastr.info('Booking added with success');
       this.search();
     }, error => {

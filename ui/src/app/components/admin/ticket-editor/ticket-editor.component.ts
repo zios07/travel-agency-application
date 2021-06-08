@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -29,10 +29,13 @@ export class TicketEditorComponent implements OnInit {
 
   ngOnInit() {
     this.ticketForm = this.formBuilder.group({
-      city: ['', Validators.required],
-      name: ['', Validators.required],
+      departure: ['', Validators.required],
+      destination: ['', Validators.required],
+      date: ['', Validators.required],
+      hour: ['', Validators.required],
+      company: ['', Validators.required],
       description: ['', Validators.required],
-      price: ['', Validators.required]
+      price: ['', Validators.required],
     });
   }
 

@@ -9,19 +9,11 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
-      <mat-label>Start date</mat-label>
-      <input matInput [matDatepicker]="picker1" formControlName="startDate">
+      <mat-label>Date</mat-label>
+      <input matInput [matDatepicker]="picker1" formControlName="date">
       <mat-datepicker-toggle placeholder="dd/MM/yyyy" matSuffix
                              [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline">
-      <mat-label>End date</mat-label>
-      <input matInput [matDatepicker]="picker2" formControlName="endDate">
-      <mat-datepicker-toggle placeholder="dd/MM/yyyy" matSuffix
-                             [for]="picker2"></mat-datepicker-toggle>
-      <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
 
     <button mat-raised-button [disabled]="searchForm.invalid" (click)="search()">Search</button>
@@ -44,7 +36,8 @@
       </mat-card-content>
       <mat-card-actions>
         <h3>{{cityBreak.price | currency}}</h3>
-        <button mat-raised-button (click)="addBooking(cityBreak)">Add booking</button>
+        <button *ngIf="cityBreak.availableCount > 0" mat-raised-button (click)="addBooking(cityBreak)">Add booking</button>
+        <span *ngIf="cityBreak.availableCount === 0" style="color: red">City break not available</span>
       </mat-card-actions>
     </mat-card>
 

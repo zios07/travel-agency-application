@@ -27,4 +27,10 @@ export class OrderHistoryComponent implements OnInit {
     });
   }
 
+  getDaysBetween(start, end) {
+    start = new Date(start);
+    end = new Date(end);
+    return Math.round((end - start) / (1000 * 60 * 60 * 24));
+  }
+
 }

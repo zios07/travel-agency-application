@@ -31,7 +31,9 @@ export class CityBreakEditorComponent implements OnInit {
       city: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
-      price: ['', Validators.required]
+      price: ['', Validators.required],
+      availableCount: ['', Validators.required],
+      date: ['', Validators.required]
     });
   }
 

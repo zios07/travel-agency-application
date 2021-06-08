@@ -5,13 +5,17 @@
 <div class="bookings-container" *ngIf=" bookings.length > 0">
   <mat-card class="example-card" *ngFor="let booking of bookings">
     <mat-card-header>
-      <mat-card-title>{{booking.product.name}}</mat-card-title>
+      <mat-card-title>
+        <span *ngIf="booking.product.type === 'HOTEL'">{{booking.product.name}}</span>
+        <span *ngIf="booking.product.type === 'TICKET'">{{booking.product.company}}</span>
+      </mat-card-title>
       <mat-card-subtitle>{{booking.product.type}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <p>
         {{booking.product.description}}<br>
-        {{booking.product.price | currency}}
+        Price:  {{booking.product.price | currency}} <br>
+        <span *ngIf="booking.product.type === 'HOTEL'">Total price: {{getDaysBetween(booking.startDate, booking.endDate) * booking.product.price | currency}}</span>
       </p>
     </mat-card-content>
   </mat-card>

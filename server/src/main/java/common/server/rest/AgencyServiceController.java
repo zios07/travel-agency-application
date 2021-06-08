@@ -38,14 +38,21 @@ public class AgencyServiceController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("tickets/{city}")
-    public List<Ticket> getTickets(@PathVariable String city) {
-        return ticketRepository.findByCity(city);
+    @GetMapping("tickets")
+    public List<Ticket> getTickets(
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
+            @RequestParam int hour,
+            @RequestParam String departure,
+            @RequestParam String destination) {
+        return ticketRepository.findByDepartureAndDestinationAndDateAndHour(departure, destination, date, hour);
     }
 
-    @GetMapping("city-breaks/{city}")
-    public List<CityBreak> getCityBreak(@PathVariable String city) {
-        return cityBreakRepository.findByCity(city);
+    @GetMapping("city-breaks")
+    public List<CityBreak> getCityBreak(
+            @RequestParam String city,
+            @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date
+    ) {
+        return cityBreakRepository.findByCityAndDate(city, date);
     }
 
     @PostMapping("hotels")

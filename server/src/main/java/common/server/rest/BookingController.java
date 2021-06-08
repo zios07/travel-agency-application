@@ -1,13 +1,13 @@
 package common.server.rest;
 
-import common.server.domain.Hotel;
 import common.server.domain.Booking;
-import common.server.domain.Ticket;
+import common.server.domain.CityBreak;
+import common.server.domain.Hotel;
 import common.server.domain.User;
 import common.server.exception.NotFoundException;
 import common.server.repository.BookingRepository;
+import common.server.repository.CityBreakRepository;
 import common.server.repository.HotelRepository;
-import common.server.repository.TicketRepository;
 import common.server.service.impl.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/bookings")
@@ -24,7 +25,7 @@ public class BookingController {
 
     private final BookingRepository bookingRepository;
     private final HotelRepository hotelRepository;
-    private final TicketRepository ticketRepository;
+    private final CityBreakRepository cityBreakRepository;
     private final UserService userService;
 
     @GetMapping
@@ -57,6 +58,15 @@ public class BookingController {
     public Booking bookCityBreak(@RequestBody @Valid Booking booking) throws NotFoundException {
         booking.setUser(userService.getConnectedUser());
         booking.setConfirmed(false);
+        Optional<CityBreak> cityBreakOptional = cityBreakRepository.findById(booking.getProduct().getId());
+        if (!cityBreakOptional.isPresent()) {
+            throw new NotFoundException("City break not found", "Could not find city break with id: " + booking.getProduct().getId());
+        }
+        CityBreak cityBreak = cityBreakOptional.get();
+        cityBreak.setAvailableCount(cityBreak.getAvailableCount() - 1);
+        cityBreak = cityBreakRepository.save(cityBreak);
+        booking.setProduct(cityBreak);
+        booking.setEndDate(booking.getStartDate().plusDays(2));
         return bookingRepository.save(booking);
     }
 

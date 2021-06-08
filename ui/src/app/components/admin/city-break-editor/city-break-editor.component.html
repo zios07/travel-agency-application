@@ -10,25 +10,46 @@
       <form *ngIf="!submitted" [formGroup]="cityBreakForm" (ngSubmit)="onSubmit()" #form="ngForm">
         <mat-grid-list cols="3" rowHeight="100px">
           <mat-grid-tile>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <input matInput placeholder="City" formControlName="city">
             </mat-form-field>
           </mat-grid-tile>
+
           <mat-grid-tile>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <input matInput placeholder="Name" formControlName="name">
             </mat-form-field>
           </mat-grid-tile>
+
           <mat-grid-tile>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
               <input matInput placeholder="Description" formControlName="description">
             </mat-form-field>
           </mat-grid-tile>
+
+
           <mat-grid-tile>
-            <mat-form-field>
-              <input matInput type="number" placeholder="Price" formControlName="price">
+            <mat-form-field appearance="outline">
+              <mat-label>Date</mat-label>
+              <input matInput [matDatepicker]="picker1" formControlName="date">
+              <mat-datepicker-toggle placeholder="dd/MM/yyyy" matSuffix
+                                     [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1></mat-datepicker>
             </mat-form-field>
           </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <input matInput type="number" min="1" placeholder="Price" formControlName="price">
+            </mat-form-field>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <input matInput type="number" min="1" placeholder="Available places" formControlName="availableCount">
+            </mat-form-field>
+          </mat-grid-tile>
+
           <mat-grid-tile>
             <button type="submit" [disabled]="!form.form.valid" mat-raised-button color="primary">Save</button>
           </mat-grid-tile>
