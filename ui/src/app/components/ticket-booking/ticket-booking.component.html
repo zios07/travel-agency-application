@@ -1,4 +1,3 @@
-
 <div class="container">
 
   <form class="search-form" [formGroup]="searchForm">
@@ -21,11 +20,6 @@
       <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Flight hour</mat-label>
-      <input formControlName="hour" type="number" min="0" max="23" matInput placeholder="City...">
-    </mat-form-field>
-
     <button mat-raised-button [disabled]="searchForm.invalid" (click)="search()">Search</button>
 
   </form>
@@ -35,9 +29,12 @@
 
     <mat-card class="example-card" *ngFor="let ticket of tickets">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{ticket.name}}</mat-card-title>
-        <mat-card-subtitle>{{ticket.city }}</mat-card-subtitle>
+        <mat-card-title>
+          Departure: {{ticket.departure}} <br>
+          Destination: {{ticket.destination }}
+          <br>
+          Flight hour: {{ticket.hour}}</mat-card-title>
+        <mat-card-subtitle>{{ticket.company}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <p>
@@ -45,7 +42,7 @@
         </p>
       </mat-card-content>
       <mat-card-actions>
-        <h3>{{ticket.price | currency}}</h3>
+        <h3>Price: {{ticket.price | currency}}</h3>
         <button mat-raised-button (click)="addBooking(ticket)">Add booking</button>
       </mat-card-actions>
     </mat-card>

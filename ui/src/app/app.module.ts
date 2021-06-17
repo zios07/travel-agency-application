@@ -43,6 +43,7 @@ import { CityBreakEditorComponent } from './components/admin/city-break-editor/c
 import { HotelBookingComponent } from './components/hotel-booking/hotel-booking.component';
 import { TicketBookingComponent } from './components/ticket-booking/ticket-booking.component';
 import { CityBreakBookingComponent } from './components/city-break-booking/city-break-booking.component';
+import { UnauthorizedComponent } from './components/common/unauthorized/unauthorized.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { CityBreakBookingComponent } from './components/city-break-booking/city-
     CityBreakEditorComponent,
     HotelBookingComponent,
     TicketBookingComponent,
-    CityBreakBookingComponent
+    CityBreakBookingComponent,
+    UnauthorizedComponent
   ],
   imports: [
     BrowserModule,

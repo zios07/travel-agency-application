@@ -20,7 +20,6 @@ export class TicketBookingComponent implements OnInit {
       departure: ['', Validators.required],
       destination: ['', Validators.required],
       date: ['', Validators.required],
-      hour: ['', Validators.required]
     });
   }
 
@@ -33,7 +32,6 @@ export class TicketBookingComponent implements OnInit {
     }
     const params = new HttpParams()
       .set('date', this.formatDate(this.searchForm.value.date))
-      .set('hour', this.searchForm.value.hour)
       .set('departure', this.searchForm.value.departure)
       .set('destination', this.searchForm.value.destination);
     this.http.get(environment.API_URL + '/agency-services/tickets', {params}).subscribe(resp => {

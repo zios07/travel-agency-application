@@ -7,5 +7,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    List<Ticket> findByDepartureAndDestinationAndDateAndHour(String departure, String destination, LocalDate date, int hour);
+
+    List<Ticket> findByDepartureAndDestinationAndDateOrderByHour(String departure, String destination, LocalDate date);
 }

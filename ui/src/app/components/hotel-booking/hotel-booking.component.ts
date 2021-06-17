@@ -18,6 +18,7 @@ export class HotelBookingComponent implements OnInit {
   constructor(private http: HttpClient, private toastr: ToastrService, private fb: FormBuilder) {
     this.searchForm = this.fb.group({
       city: ['', Validators.required],
+      maxPrice: [''],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required]
     });
@@ -31,7 +32,8 @@ export class HotelBookingComponent implements OnInit {
       return;
     }
     const params = new HttpParams().set('startDate', this.formatDate(this.searchForm.value.startDate))
-      .set('endDate', this.formatDate(this.searchForm.value.endDate));
+      .set('endDate', this.formatDate(this.searchForm.value.endDate))
+      .set('maxPrice', this.searchForm.value.maxPrice);
     this.http.get(environment.API_URL + '/agency-services/hotels/' + this.searchForm.value.city, {params}).subscribe(resp => {
       this.hotels = resp;
     }, error => {

@@ -13,6 +13,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,9 +29,16 @@ public class AgencyServiceController {
 
     @GetMapping("hotels/{city}")
     public List<Hotel> getHotels(@PathVariable String city,
+                                 @RequestParam(required = false) Double maxPrice,
                                  @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate startDate,
                                  @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate endDate) {
-        List<Hotel> hotels = hotelRepository.findByCity(city);
+        List<Hotel> hotels = new ArrayList<>();
+        if (maxPrice != null) {
+            hotels = hotelRepository.findByCityAndPriceLessThanEqual(city, maxPrice);
+
+        } else {
+            hotels = hotelRepository.findByCity(city);
+        }
         // Only return the hotels that have available rooms for the given date range
         return hotels.stream().filter(
                 hotel ->
@@ -41,10 +49,9 @@ public class AgencyServiceController {
     @GetMapping("tickets")
     public List<Ticket> getTickets(
             @RequestParam @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate date,
-            @RequestParam int hour,
             @RequestParam String departure,
             @RequestParam String destination) {
-        return ticketRepository.findByDepartureAndDestinationAndDateAndHour(departure, destination, date, hour);
+        return ticketRepository.findByDepartureAndDestinationAndDateOrderByHour(departure, destination, date);
     }
 
     @GetMapping("city-breaks")

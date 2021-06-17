@@ -8,6 +8,11 @@
     </mat-form-field>
 
     <mat-form-field appearance="outline">
+      <mat-label>Max price per night</mat-label>
+      <input formControlName="maxPrice" matInput placeholder="Max price">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
       <mat-label>Start date</mat-label>
       <input matInput [max]="searchForm.value.endDate" [matDatepicker]="picker1" formControlName="startDate">
       <mat-datepicker-toggle placeholder="dd/MM/yyyy" matSuffix
@@ -24,7 +29,7 @@
     </mat-form-field>
 
     <button mat-raised-button [disabled]="searchForm.invalid" (click)="search()">Search</button>
-
+  <br>
   </form>
 
 

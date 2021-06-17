@@ -9,6 +9,8 @@ import {OrderHistoryComponent} from './components/order-history/order-history.co
 import {HotelEditorComponent} from './components/admin/hotel-editor/hotel-editor.component';
 import {TicketEditorComponent} from './components/admin/ticket-editor/ticket-editor.component';
 import {CityBreakEditorComponent} from './components/admin/city-break-editor/city-break-editor.component';
+import {UnauthorizedComponent} from './components/common/unauthorized/unauthorized.component';
+import {AdminGuard} from './guards/admin.guard';
 
 
 const routes: Routes = [
@@ -18,9 +20,10 @@ const routes: Routes = [
   {path: 'cart', component: CartComponent},
   {path: 'account-info', component: ProfileComponent},
   {path: 'order-history', component: OrderHistoryComponent},
-  {path: 'admin/hotel-editor', component: HotelEditorComponent},
-  {path: 'admin/ticket-editor', component: TicketEditorComponent},
-  {path: 'admin/city-break-editor', component: CityBreakEditorComponent},
+  {path: 'admin/hotel-editor', component: HotelEditorComponent, canActivate: [AdminGuard]},
+  {path: 'admin/ticket-editor', component: TicketEditorComponent, canActivate: [AdminGuard]},
+  {path: 'admin/city-break-editor', component: CityBreakEditorComponent, canActivate: [AdminGuard]},
+  {path: 'unauthorized', component: UnauthorizedComponent},
   {path: '**', redirectTo: ''}
 
 ];

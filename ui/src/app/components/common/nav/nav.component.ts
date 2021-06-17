@@ -25,6 +25,7 @@ export class NavComponent {
       if (val instanceof NavigationEnd) {
         this.authenticated = this.authService.isAuthenticated();
         this.authService.getConnectedUser().then(user => {
+          this.authService.connectedUser = user;
           this.connectedUser = user;
           if (this.authenticated) {
             this.connectedRole = this.connectedUser.role;
