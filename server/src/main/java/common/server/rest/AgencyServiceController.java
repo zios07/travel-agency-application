@@ -2,6 +2,7 @@ package common.server.rest;
 
 import common.server.domain.CityBreak;
 import common.server.domain.Hotel;
+import common.server.domain.ProductPhoto;
 import common.server.domain.Ticket;
 import common.server.enums.ProductType;
 import common.server.repository.BookingRepository;
@@ -11,7 +12,9 @@ import common.server.repository.TicketRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -63,7 +66,16 @@ public class AgencyServiceController {
     }
 
     @PostMapping("hotels")
-    public Hotel createHotel(@RequestBody Hotel hotel) {
+    public Hotel createHotel(
+            @RequestPart(name = "photo", required = false) MultipartFile photo,
+            @RequestPart(name = "hotel", required = true) Hotel hotel
+    ) throws IOException {
+        if (photo != null) {
+            ProductPhoto productPhoto = new ProductPhoto();
+            productPhoto.setPhoto(photo.getBytes());
+            productPhoto.setContentType(photo.getContentType());
+            hotel.setPhoto(productPhoto);
+        }
         hotel.setAvailableRooms(hotel.getTotalRooms());
         hotel.setType(ProductType.HOTEL);
         return hotelRepository.save(hotel);

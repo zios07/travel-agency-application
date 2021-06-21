@@ -17,6 +17,7 @@
         Price:  {{booking.product.price | currency}} <br>
         <span *ngIf="booking.product.type === 'HOTEL'">Total price: {{getDaysBetween(booking.startDate, booking.endDate) * booking.product.price | currency}}</span>
       </p>
+      <button mat-raised-button (click)="deleteItem(booking)">Delete</button>
     </mat-card-content>
   </mat-card>
   <br>

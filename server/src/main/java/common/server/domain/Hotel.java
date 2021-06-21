@@ -5,7 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Lob;
+import javax.persistence.OneToOne;
 
 @Entity
 @Data
@@ -20,5 +23,8 @@ public class Hotel extends Product {
     private int totalRooms;
 
     private int availableRooms;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private ProductPhoto photo;
 
 }

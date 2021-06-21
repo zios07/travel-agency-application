@@ -42,4 +42,8 @@ export class CartComponent implements OnInit {
     return Math.round((end - start) / (1000 * 60 * 60 * 24));
   }
 
+  deleteItem(booking) {
+    const index = this.bookings.indexOf(booking);
+    this.bookings.splice(index, 1);
+  }
 }

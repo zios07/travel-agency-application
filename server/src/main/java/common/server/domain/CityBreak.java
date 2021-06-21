@@ -3,17 +3,17 @@ package common.server.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import java.time.LocalDate;
 
 @Entity
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class CityBreak extends Product {
-
-    public CityBreak() {
-    }
 
     private String name;
 
@@ -22,5 +22,8 @@ public class CityBreak extends Product {
     private LocalDate date;
 
     private Integer availableCount;
+
+    @OneToOne
+    private ProductPhoto photo;
 
 }

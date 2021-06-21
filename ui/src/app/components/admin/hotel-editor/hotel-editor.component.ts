@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
@@ -15,6 +15,7 @@ export class HotelEditorComponent implements OnInit {
   title = 'Hotel editor';
   hotelForm: FormGroup;
   submitted = false;
+  photo;
 
   constructor(
     private route: ActivatedRoute,
@@ -31,13 +32,28 @@ export class HotelEditorComponent implements OnInit {
       city: ['', Validators.required],
       name: ['', Validators.required],
       totalRooms: ['', Validators.required],
-      roomPrice: ['', Validators.required]
+      roomPrice: ['', Validators.required],
+      photos: []
     });
   }
 
+  photoChanged(event) {
+    this.photo = event.target.files[0];
+  }
+
   onSubmit() {
+
+    const formData: FormData = new FormData();
+
+    formData.append('hotel',
+      new Blob([JSON.stringify(this.hotelForm.value)], {
+        type: 'application/json'
+      }));
+    const blob = new Blob([this.photo], {type: 'application/json'});
+    formData.append('photo', blob, this.photo.name);
+
     this.submitted = true;
-    this.http.post(environment.API_URL + '/agency-services/hotels', this.hotelForm.value).subscribe(resp => {
+    this.http.post(environment.API_URL + '/agency-services/hotels', formData).subscribe(resp => {
       this.toastr.success('Hotel created');
       this.submitted = false;
       this.router.navigate(['/admin/dashboard']);
