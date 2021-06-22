@@ -70,4 +70,9 @@ public class BookingController {
         return bookingRepository.save(booking);
     }
 
+    @DeleteMapping(value = "{id}")
+    public void deleteBooking(@PathVariable Long id) {
+        bookingRepository.deleteById(id);
+    }
+
 }

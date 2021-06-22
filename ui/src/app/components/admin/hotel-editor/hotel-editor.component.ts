@@ -45,8 +45,11 @@ export class HotelEditorComponent implements OnInit {
 
     const formData: FormData = new FormData();
 
+    const hotel = this.hotelForm.value;
+    hotel.price = this.hotelForm.value.roomPrice;
+
     formData.append('hotel',
-      new Blob([JSON.stringify(this.hotelForm.value)], {
+      new Blob([JSON.stringify(hotel)], {
         type: 'application/json'
       }));
     const blob = new Blob([this.photo], {type: 'application/json'});

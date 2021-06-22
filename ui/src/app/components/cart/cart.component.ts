@@ -43,7 +43,9 @@ export class CartComponent implements OnInit {
   }
 
   deleteItem(booking) {
-    const index = this.bookings.indexOf(booking);
-    this.bookings.splice(index, 1);
+    this.http.delete(environment.API_URL + '/bookings/' + booking.id).subscribe(() => {
+      const index = this.bookings.indexOf(booking);
+      this.bookings.splice(index, 1);
+    });
   }
 }

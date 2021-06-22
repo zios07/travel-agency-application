@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.OneToOne;
 import java.time.LocalDate;
@@ -23,7 +24,7 @@ public class CityBreak extends Product {
 
     private Integer availableCount;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private ProductPhoto photo;
 
 }
