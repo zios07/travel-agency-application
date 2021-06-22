@@ -88,7 +88,16 @@ public class AgencyServiceController {
     }
 
     @PostMapping("city-breaks")
-    public CityBreak createCityBreak(@RequestBody CityBreak cityBreak) {
+    public CityBreak createCityBreak(
+            @RequestPart(name = "photo", required = false) MultipartFile photo,
+            @RequestPart(name = "cityBreak", required = true) CityBreak cityBreak
+    ) throws IOException {
+        if (photo != null) {
+            ProductPhoto productPhoto = new ProductPhoto();
+            productPhoto.setPhoto(photo.getBytes());
+            productPhoto.setContentType(photo.getContentType());
+            cityBreak.setPhoto(productPhoto);
+        }
         cityBreak.setType(ProductType.CITY_BREAK);
         return cityBreakRepository.save(cityBreak);
     }

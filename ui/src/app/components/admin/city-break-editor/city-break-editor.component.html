@@ -51,6 +51,12 @@
           </mat-grid-tile>
 
           <mat-grid-tile>
+            <input #photoInput hidden="true" formControlName="photos" type="file" onclick="this.value=null" (change)="photoChanged($event)"
+                   accept=".png"/>
+            <button mat-flat-button type="button" color="primary" (click)="photoInput.click()">Import Photo</button>
+          </mat-grid-tile>
+
+          <mat-grid-tile>
             <button type="submit" [disabled]="!form.form.valid" mat-raised-button color="primary">Save</button>
           </mat-grid-tile>
         </mat-grid-list>

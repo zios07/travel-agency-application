@@ -15,6 +15,7 @@ export class CityBreakEditorComponent implements OnInit {
   title = 'City break editor';
   cityBreakForm: FormGroup;
   submitted = false;
+  photo;
 
   constructor(
     private route: ActivatedRoute,
@@ -24,6 +25,10 @@ export class CityBreakEditorComponent implements OnInit {
     private http: HttpClient
   ) {
 
+  }
+
+  photoChanged(event) {
+    this.photo = event.target.files[0];
   }
 
   ngOnInit() {
@@ -38,8 +43,17 @@ export class CityBreakEditorComponent implements OnInit {
   }
 
   onSubmit() {
+    const formData: FormData = new FormData();
+
+    formData.append('cityBreak',
+      new Blob([JSON.stringify(this.cityBreakForm.value)], {
+        type: 'application/json'
+      }));
+    const blob = new Blob([this.photo], {type: 'application/json'});
+    formData.append('photo', blob, this.photo.name);
+
     this.submitted = true;
-    this.http.post(environment.API_URL + '/agency-services/city-breaks', this.cityBreakForm.value).subscribe(resp => {
+    this.http.post(environment.API_URL + '/agency-services/city-breaks', formData).subscribe(resp => {
       this.toastr.success('City break created');
       this.submitted = false;
       this.router.navigate(['/admin/dashboard']);

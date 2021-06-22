@@ -1,4 +1,3 @@
-
 <div class="container">
 
   <form class="search-form" [formGroup]="searchForm">
@@ -25,18 +24,29 @@
 
     <mat-card class="example-card" *ngFor="let cityBreak of cityBreaks">
       <mat-card-header>
-        <div mat-card-avatar class="example-header-image"></div>
-        <mat-card-title>{{cityBreak.name}}</mat-card-title>
-        <mat-card-subtitle>{{cityBreak.city }}</mat-card-subtitle>
+
+        <div mat-card-avatar class="example-header-image">
+          <img *ngIf="cityBreak.photo && cityBreak.photo.photo" src="data:image/jpeg;base64,{{cityBreak.photo.photo}}"/>
+          <img *ngIf="!cityBreak.photo || !cityBreak.photo.photo" src="assets/image-not-found.jpeg"/>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+
       </mat-card-header>
       <mat-card-content>
+
+        <h5>{{cityBreak.name}}</h5>
+        <h6>{{cityBreak.city }}</h6>
         <p>
           {{cityBreak.description}}
         </p>
       </mat-card-content>
       <mat-card-actions>
         <h3>{{cityBreak.price | currency}}</h3>
-        <button *ngIf="cityBreak.availableCount > 0" mat-raised-button (click)="addBooking(cityBreak)">Add booking</button>
+        <button *ngIf="cityBreak.availableCount > 0" mat-raised-button (click)="addBooking(cityBreak)">Add booking
+        </button>
         <span *ngIf="cityBreak.availableCount === 0" style="color: red">City break not available</span>
       </mat-card-actions>
     </mat-card>
